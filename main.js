@@ -15,18 +15,16 @@ const options = {
       'sec-fetch-site': 'cross-site',
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 OPR/105.0.0.0'
     },
+    mode: 'no-cors',
     body: '{"partnerUserId":"ada946122c77c8140b396467cd0a3e9644a4ea14611c4ccde4df927504ffc83a"}'
   };
   
-var rawData = fetch('https://api.discord.gx.games/v1/direct-fulfillment', options)
-    .then(response => response.json())
-    .then(response => console.log(response))
-    .catch(err => console.error(err));
-
-var parsedData = JSON.parse(rawData);
-
-var id = parsedData.partnerUserId
-
-var link = "https://discord.com/billing/partner-promotions/1180231712274387115/", id
-
-console.log(id);
+fetch('https://api.discord.gx.games/v1/direct-fulfillment', options)
+  .then(response => response.json())
+  .then(parsedData => {
+      var id = parsedData.partnerUserId;
+      var link = "https://discord.com/billing/partner-promotions/1180231712274387115/" + id;
+      console.log(id);
+      console.log(link);
+  })
+  .catch(err => console.error(err));
